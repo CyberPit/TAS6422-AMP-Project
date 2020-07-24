@@ -1,0 +1,320 @@
+Version 4.0 HI-TECH Software Intermediate Code
+[v F613 `(v ~T0 @X0 0 tf ]
+"39 ././lcd_driver_files/i2c-lcdlib-ceg003400.h
+[; ;././lcd_driver_files/i2c-lcdlib-ceg003400.h: 39: void i2c_lcd_set_cursor_pos(unsigned char col, unsigned char line);
+[v _i2c_lcd_set_cursor_pos `(v ~T0 @X0 0 ef2`uc`uc ]
+"113 /Applications/microchip/xc8/v2.20/pic/include/c99/stdio.h
+[v _sprintf `(i ~T0 @X0 0 e1v`*uc`*Cuc ]
+"21 disp_param.c
+[; ;disp_param.c: 21: extern char lcdbuff[],ledbuff[], led_dot[];
+[v _lcdbuff `uc ~T0 @X0 -> 0 `x e ]
+"25
+[; ;disp_param.c: 25: extern unsigned char current_source;
+[v _current_source `uc ~T0 @X0 0 e ]
+"33 ././lcd_driver_files/i2c-lcdlib-ceg003400.h
+[; ;././lcd_driver_files/i2c-lcdlib-ceg003400.h: 33: void i2c_lcd_puts(unsigned char *s);
+[v _i2c_lcd_puts `(v ~T0 @X0 0 ef1`*uc ]
+"30 disp_param.c
+[; ;disp_param.c: 30: extern signed char current_direction;
+[v _current_direction `c ~T0 @X0 0 e ]
+"36 ././mcc_generated_files/drivers/i2c_simple_master.h
+[; ;././mcc_generated_files/drivers/i2c_simple_master.h: 36: uint8_t i2c_read1ByteRegister(i2c1_address_t address, uint8_t reg);
+[v _i2c_read1ByteRegister `(uc ~T0 @X0 0 ef2`uc`uc ]
+"26 disp_param.c
+[; ;disp_param.c: 26: extern unsigned char current_volume;
+[v _current_volume `uc ~T0 @X0 0 e ]
+"29
+[; ;disp_param.c: 29: extern signed char current_balance;
+[v _current_balance `c ~T0 @X0 0 e ]
+"213 ././mcc_generated_files/drivers/.././i2c1_master.h
+[; ;././mcc_generated_files/drivers/.././i2c1_master.h: 213: void (*MSSP1_InterruptHandler)(void);
+[v _MSSP1_InterruptHandler `*F613 ~T0 @X0 1 e ]
+[v F658 `Cuc ~T0 @X0 -> 8 `i t ]
+"34 disp_param.c
+[; ;disp_param.c: 34: const char lcd_src_name[5][8] = {"COAXIAL","OPTICAL", "ADC    ", "HDMI   ", "I2S    "};
+[v _lcd_src_name `F658 ~T0 @X0 -> 5 `i e ]
+[i _lcd_src_name
+:U ..
+:U ..
+-> 67 `c
+-> 79 `c
+-> 65 `c
+-> 88 `c
+-> 73 `c
+-> 65 `c
+-> 76 `c
+-> 0 `c
+..
+:U ..
+-> 79 `c
+-> 80 `c
+-> 84 `c
+-> 73 `c
+-> 67 `c
+-> 65 `c
+-> 76 `c
+-> 0 `c
+..
+:U ..
+-> 65 `c
+-> 68 `c
+-> 67 `c
+-> 32 `c
+-> 32 `c
+-> 32 `c
+-> 32 `c
+-> 0 `c
+..
+:U ..
+-> 72 `c
+-> 68 `c
+-> 77 `c
+-> 73 `c
+-> 32 `c
+-> 32 `c
+-> 32 `c
+-> 0 `c
+..
+:U ..
+-> 73 `c
+-> 50 `c
+-> 83 `c
+-> 32 `c
+-> 32 `c
+-> 32 `c
+-> 32 `c
+-> 0 `c
+..
+..
+]
+[v F660 `Cuc ~T0 @X0 -> 7 `i t ]
+"36
+[; ;disp_param.c: 36: const char lcd_aux_name[2][7] = { "INPUT ", "OUTPUT"};
+[v _lcd_aux_name `F660 ~T0 @X0 -> 2 `i e ]
+[i _lcd_aux_name
+:U ..
+:U ..
+-> 73 `c
+-> 78 `c
+-> 80 `c
+-> 85 `c
+-> 84 `c
+-> 32 `c
+-> 0 `c
+..
+:U ..
+-> 79 `c
+-> 85 `c
+-> 84 `c
+-> 80 `c
+-> 85 `c
+-> 84 `c
+-> 0 `c
+..
+..
+]
+[v F662 `Cuc ~T0 @X0 -> 7 `i t ]
+"38
+[; ;disp_param.c: 38: const char lcd_fs_name[16][7] = {"UNLK", "  8k", " 11k", " 12k", " 16k", " 22k", " 24k", " 32k", "44.1k", " 48k", " 64k", "88.2k", " 96k", "128k", "176k", "192k"};
+[v _lcd_fs_name `F662 ~T0 @X0 -> 16 `i e ]
+[i _lcd_fs_name
+:U ..
+:U ..
+-> 85 `c
+-> 78 `c
+-> 76 `c
+-> 75 `c
+-> 0 `c
+..
+:U ..
+-> 32 `c
+-> 32 `c
+-> 56 `c
+-> 107 `c
+-> 0 `c
+..
+:U ..
+-> 32 `c
+-> 49 `c
+-> 49 `c
+-> 107 `c
+-> 0 `c
+..
+:U ..
+-> 32 `c
+-> 49 `c
+-> 50 `c
+-> 107 `c
+-> 0 `c
+..
+:U ..
+-> 32 `c
+-> 49 `c
+-> 54 `c
+-> 107 `c
+-> 0 `c
+..
+:U ..
+-> 32 `c
+-> 50 `c
+-> 50 `c
+-> 107 `c
+-> 0 `c
+..
+:U ..
+-> 32 `c
+-> 50 `c
+-> 52 `c
+-> 107 `c
+-> 0 `c
+..
+:U ..
+-> 32 `c
+-> 51 `c
+-> 50 `c
+-> 107 `c
+-> 0 `c
+..
+:U ..
+-> 52 `c
+-> 52 `c
+-> 46 `c
+-> 49 `c
+-> 107 `c
+-> 0 `c
+..
+:U ..
+-> 32 `c
+-> 52 `c
+-> 56 `c
+-> 107 `c
+-> 0 `c
+..
+:U ..
+-> 32 `c
+-> 54 `c
+-> 52 `c
+-> 107 `c
+-> 0 `c
+..
+:U ..
+-> 56 `c
+-> 56 `c
+-> 46 `c
+-> 50 `c
+-> 107 `c
+-> 0 `c
+..
+:U ..
+-> 32 `c
+-> 57 `c
+-> 54 `c
+-> 107 `c
+-> 0 `c
+..
+:U ..
+-> 49 `c
+-> 50 `c
+-> 56 `c
+-> 107 `c
+-> 0 `c
+..
+:U ..
+-> 49 `c
+-> 55 `c
+-> 54 `c
+-> 107 `c
+-> 0 `c
+..
+:U ..
+-> 49 `c
+-> 57 `c
+-> 50 `c
+-> 107 `c
+-> 0 `c
+..
+..
+]
+"40
+[; ;disp_param.c: 40: void lcd_disp_param(void)
+[v _lcd_disp_param `(v ~T0 @X0 1 ef ]
+"41
+[; ;disp_param.c: 41: {
+{
+[e :U _lcd_disp_param ]
+[f ]
+"42
+[; ;disp_param.c: 42: uint8_t pfspo,ocdc, otshut, otwarn,clip,ilim,prail;
+[v _pfspo `uc ~T0 @X0 1 a ]
+[v _ocdc `uc ~T0 @X0 1 a ]
+[v _otshut `uc ~T0 @X0 1 a ]
+[v _otwarn `uc ~T0 @X0 1 a ]
+[v _clip `uc ~T0 @X0 1 a ]
+[v _ilim `uc ~T0 @X0 1 a ]
+[v _prail `uc ~T0 @X0 1 a ]
+"44
+[; ;disp_param.c: 44:     i2c_lcd_set_cursor_pos(0, 0);
+[e ( _i2c_lcd_set_cursor_pos (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+"45
+[; ;disp_param.c: 45:     sprintf(lcdbuff,"SOURCE:%s", lcd_src_name[current_source % 5]);
+[e ( _sprintf (1 , (. , &U _lcdbuff :s 1C &U *U + &U _lcd_src_name * -> -> % -> _current_source `i -> 5 `i `ui `ux -> * -> # *U &U *U &U _lcd_src_name `ui -> -> 8 `i `ui `ux ]
+"46
+[; ;disp_param.c: 46:     i2c_lcd_puts(lcdbuff);
+[e ( _i2c_lcd_puts (1 -> &U _lcdbuff `*uc ]
+"48
+[; ;disp_param.c: 48:    i2c_lcd_set_cursor_pos(0, 1);
+[e ( _i2c_lcd_set_cursor_pos (2 , -> -> 0 `i `uc -> -> 1 `i `uc ]
+"49
+[; ;disp_param.c: 49:     sprintf(lcdbuff,"AUX:%s HPF:%s", lcd_aux_name[current_direction %2],lcd_aux_name[0]);
+[e ( _sprintf (1 , , (. , &U _lcdbuff :s 2C &U *U + &U _lcd_aux_name * -> -> % -> _current_direction `i -> 2 `i `ui `ux -> * -> # *U &U *U &U _lcd_aux_name `ui -> -> 7 `i `ui `ux &U *U + &U _lcd_aux_name * -> -> -> 0 `i `ui `ux -> * -> # *U &U *U &U _lcd_aux_name `ui -> -> 7 `i `ui `ux ]
+"50
+[; ;disp_param.c: 50:     i2c_lcd_puts(lcdbuff);
+[e ( _i2c_lcd_puts (1 -> &U _lcdbuff `*uc ]
+"52
+[; ;disp_param.c: 52:     pfspo = i2c_read1ByteRegister(0x40, 0x38);
+[e = _pfspo ( _i2c_read1ByteRegister (2 , -> -> 64 `i `uc -> -> 56 `i `uc ]
+"53
+[; ;disp_param.c: 53:     i2c_lcd_set_cursor_pos(0, 2);
+[e ( _i2c_lcd_set_cursor_pos (2 , -> -> 0 `i `uc -> -> 2 `i `uc ]
+"54
+[; ;disp_param.c: 54:     sprintf(lcdbuff,"VOL:%3d BAL:%2d %s",current_volume, (signed char)current_balance, lcd_fs_name[(0x0F &pfspo)]);
+[e ( _sprintf (1 , , , (. , &U _lcdbuff :s 3C -> _current_volume `i -> _current_balance `i &U *U + &U _lcd_fs_name * -> -> & -> 15 `i -> _pfspo `i `ui `ux -> * -> # *U &U *U &U _lcd_fs_name `ui -> -> 7 `i `ui `ux ]
+"55
+[; ;disp_param.c: 55:     i2c_lcd_puts(lcdbuff);
+[e ( _i2c_lcd_puts (1 -> &U _lcdbuff `*uc ]
+"57
+[; ;disp_param.c: 57:     ocdc = i2c_read1ByteRegister(0x6a, 0x10);
+[e = _ocdc ( _i2c_read1ByteRegister (2 , -> -> 106 `i `uc -> -> 16 `i `uc ]
+"58
+[; ;disp_param.c: 58:     otwarn = i2c_read1ByteRegister(0x6a, 0x13);
+[e = _otwarn ( _i2c_read1ByteRegister (2 , -> -> 106 `i `uc -> -> 19 `i `uc ]
+"59
+[; ;disp_param.c: 59:     clip = i2c_read1ByteRegister(0x6a, 0x24);
+[e = _clip ( _i2c_read1ByteRegister (2 , -> -> 106 `i `uc -> -> 36 `i `uc ]
+"60
+[; ;disp_param.c: 60:     ilim = i2c_read1ByteRegister(0x6a, 0x25);
+[e = _ilim ( _i2c_read1ByteRegister (2 , -> -> 106 `i `uc -> -> 37 `i `uc ]
+"61
+[; ;disp_param.c: 61:     otshut = i2c_read1ByteRegister(0x6a, 0x12);
+[e = _otshut ( _i2c_read1ByteRegister (2 , -> -> 106 `i `uc -> -> 18 `i `uc ]
+"62
+[; ;disp_param.c: 62:     prail = i2c_read1ByteRegister(0x6a, 0x11);
+[e = _prail ( _i2c_read1ByteRegister (2 , -> -> 106 `i `uc -> -> 17 `i `uc ]
+"63
+[; ;disp_param.c: 63:  i2c_lcd_set_cursor_pos(0, 3);
+[e ( _i2c_lcd_set_cursor_pos (2 , -> -> 0 `i `uc -> -> 3 `i `uc ]
+"64
+[; ;disp_param.c: 64:     sprintf(lcdbuff,"WAR:%02X %02X %02X %02X %02X%02X",ocdc, otshut, otwarn,clip,ilim,prail);
+[e ( _sprintf (1 , , , , , , (. , &U _lcdbuff :s 4C -> _ocdc `i -> _otshut `i -> _otwarn `i -> _clip `i -> _ilim `i -> _prail `i ]
+"65
+[; ;disp_param.c: 65:     i2c_lcd_puts(lcdbuff);
+[e ( _i2c_lcd_puts (1 -> &U _lcdbuff `*uc ]
+"66
+[; ;disp_param.c: 66:  }
+[e :UE 4 ]
+}
+[p f _sprintf 10780804 ]
+[a 2C 65 85 88 58 37 115 32 72 80 70 58 37 115 0 ]
+[a 1C 83 79 85 82 67 69 58 37 115 0 ]
+[a 3C 86 79 76 58 37 51 100 32 66 65 76 58 37 50 100 32 37 115 0 ]
+[a 4C 87 65 82 58 37 48 50 88 32 37 48 50 88 32 37 48 50 88 32 37 48 50 88 32 37 48 50 88 37 48 50 88 0 ]
