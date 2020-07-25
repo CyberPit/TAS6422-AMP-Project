@@ -189,12 +189,12 @@ Command9211     CALC_MOUT  ={0x37, 0x05};
 Command9211     CALC_MPOB  ={0x37, 0x06}; 
 Command9211     CALC_DIT      ={0x37, 0x07}; 
 // ADC ReGain
-Command9211     ADC_ATTL_0dB = { 0x46, 215 };
-Command9211     ADC_ATTR_0dB = { 0x47, 215 };
-Command9211     ADC_ATTL_10dB = { 0x46, 235 };
-Command9211     ADC_ATTR_10dB = { 0x47, 235 };
-Command9211     ADC_ATTL_20dB = { 0x46, 255 };
-Command9211     ADC_ATTR_20dB = { 0x47, 255 };
+Command9211     ADC_ATTL_0dB = { 0x46, 215 };// Default Sens
+Command9211     ADC_ATTR_0dB = { 0x47, 215 };// Default Sens
+Command9211     ADC_ATTL_3dB = { 0x46, 209 }; // -3dB for adjusting input sensitivity
+Command9211     ADC_ATTR_3dB = { 0x47, 209 };// -3dB for adjusting input sensitivity
+Command9211     ADC_ATTL_6dB = { 0x46, 203 };// -6dB for adjusting input sensitivity
+Command9211     ADC_ATTR_6dB = { 0x47, 203 };// -6dB for adjusting input sensitivity
 // DIT SOURCE SELECTIONS
 Command9211     DIT_DIR     = {0x60, 0x11};
 Command9211     DIT_ADC    ={0x60, 0x22};
@@ -558,6 +558,7 @@ set_gainstr(current_volume);
                     i2c_writeNBytes(ADR_TAS6422,&TAS_FS96K, 2 );
                     break;
                  }
+         i2c_read1ByteRegister(ADR_PCM9211, 0x2d); // Dummy read for clear the Analog signal LED
          if (chk6422warning())
                 {
                 lcd_disp_param();
