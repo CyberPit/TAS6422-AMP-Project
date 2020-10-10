@@ -1,0 +1,543 @@
+Version 4.0 HI-TECH Software Intermediate Code
+[v F428 `(v ~T0 @X0 0 tf ]
+"31 mcc_generated_files/drivers/i2c_simple_master.c
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 31: static i2c1_operations_t wr1RegCompleteHandler(void *p)
+[c E360 1 2 3 4 5 .. ]
+[n E360 . I2C1_STOP I2C1_RESTART_READ I2C1_RESTART_WRITE I2C1_CONTINUE I2C1_RESET_LINK  ]
+"152 mcc_generated_files/drivers/.././i2c1_master.h
+[; ;mcc_generated_files/drivers/.././i2c1_master.h: 152: void I2C1_SetBuffer(void *buffer, size_t bufferSize);
+[v _I2C1_SetBuffer `(v ~T0 @X0 0 ef2`*v`ui ]
+[v F393 `(E360 ~T0 @X0 0 tf1`*v ]
+"164
+[; ;mcc_generated_files/drivers/.././i2c1_master.h: 164: void I2C1_SetDataCompleteCallback(i2c1_callback_t cb, void *ptr);
+[v _I2C1_SetDataCompleteCallback `(v ~T0 @X0 0 ef2`*F393`*v ]
+[v F462 `(E360 ~T0 @X0 0 tf1`*v ]
+"40 mcc_generated_files/drivers/i2c_simple_master.c
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 40:     while(!I2C1_Open(address));
+[c E355 0 1 2 .. ]
+[n E355 . I2C1_NOERR I2C1_BUSY I2C1_FAIL  ]
+"101 mcc_generated_files/drivers/.././i2c1_master.h
+[; ;mcc_generated_files/drivers/.././i2c1_master.h: 101: i2c1_error_t I2C1_Open(i2c1_address_t address);
+[v _I2C1_Open `(E355 ~T0 @X0 0 ef1`uc ]
+[v F407 `(E360 ~T0 @X0 0 tf1`*v ]
+"184
+[; ;mcc_generated_files/drivers/.././i2c1_master.h: 184: void I2C1_SetAddressNackCallback(i2c1_callback_t cb, void *ptr);
+[v _I2C1_SetAddressNackCallback `(v ~T0 @X0 0 ef2`*F407`*v ]
+[v F470 `(E360 ~T0 @X0 0 tf1`*v ]
+"128
+[; ;mcc_generated_files/drivers/.././i2c1_master.h: 128: i2c1_error_t I2C1_MasterWrite(void);
+[v _I2C1_MasterWrite `(E355 ~T0 @X0 0 ef ]
+"111
+[; ;mcc_generated_files/drivers/.././i2c1_master.h: 111: i2c1_error_t I2C1_Close(void);
+[v _I2C1_Close `(E355 ~T0 @X0 0 ef ]
+[v F476 `(E360 ~T0 @X0 0 tf1`*v ]
+[v F480 `(E360 ~T0 @X0 0 tf1`*v ]
+[v F490 `(E360 ~T0 @X0 0 tf1`*v ]
+[v F494 `(E360 ~T0 @X0 0 tf1`*v ]
+[v F502 `(E360 ~T0 @X0 0 tf1`*v ]
+[v F506 `(E360 ~T0 @X0 0 tf1`*v ]
+[v F514 `(E360 ~T0 @X0 0 tf1`*v ]
+"129 mcc_generated_files/drivers/i2c_simple_master.c
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 129: {
+[s S46 `ui 1 `*uc 1 ]
+[n S46 . len data ]
+[v F522 `(E360 ~T0 @X0 0 tf1`*v ]
+[v F532 `(E360 ~T0 @X0 0 tf1`*v ]
+"133 mcc_generated_files/drivers/.././i2c1_master.h
+[; ;mcc_generated_files/drivers/.././i2c1_master.h: 133: i2c1_error_t I2C1_MasterRead(void);
+[v _I2C1_MasterRead `(E355 ~T0 @X0 0 ef ]
+"213 mcc_generated_files/drivers/.././i2c1_master.h
+[; ;mcc_generated_files/drivers/.././i2c1_master.h: 213: void (*MSSP1_InterruptHandler)(void);
+[v _MSSP1_InterruptHandler `*F428 ~T0 @X0 1 e ]
+"31 mcc_generated_files/drivers/i2c_simple_master.c
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 31: static i2c1_operations_t wr1RegCompleteHandler(void *p)
+[v _wr1RegCompleteHandler `(E360 ~T0 @X0 1 sf1`*v ]
+"32
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 32: {
+{
+[e :U _wr1RegCompleteHandler ]
+"31
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 31: static i2c1_operations_t wr1RegCompleteHandler(void *p)
+[v _p `*v ~T0 @X0 1 r1 ]
+"32
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 32: {
+[f ]
+"33
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 33:     I2C1_SetBuffer(p,1);
+[e ( _I2C1_SetBuffer (2 , _p -> -> 1 `i `ui ]
+"34
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 34:     I2C1_SetDataCompleteCallback(((void*)0),((void*)0));
+[e ( _I2C1_SetDataCompleteCallback (2 , -> -> -> 0 `i `*v `*F462 -> -> 0 `i `*v ]
+"35
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 35:     return I2C1_CONTINUE;
+[e ) . `E360 3 ]
+[e $UE 3  ]
+"36
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 36: }
+[e :UE 3 ]
+}
+"38
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 38: void i2c_write1ByteRegister(i2c1_address_t address, uint8_t reg, uint8_t data)
+[v _i2c_write1ByteRegister `(v ~T0 @X0 1 ef3`uc`uc`uc ]
+"39
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 39: {
+{
+[e :U _i2c_write1ByteRegister ]
+"38
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 38: void i2c_write1ByteRegister(i2c1_address_t address, uint8_t reg, uint8_t data)
+[v _address `uc ~T0 @X0 1 r1 ]
+[v _reg `uc ~T0 @X0 1 r2 ]
+[v _data `uc ~T0 @X0 1 r3 ]
+"39
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 39: {
+[f ]
+"40
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 40:     while(!I2C1_Open(address));
+[e $U 5  ]
+[e :U 6 ]
+[e :U 5 ]
+[e $ ! != -> ( _I2C1_Open (1 _address `ui -> -> 0 `i `ui 6  ]
+[e :U 7 ]
+"41
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 41:     I2C1_SetDataCompleteCallback(wr1RegCompleteHandler,&data);
+[e ( _I2C1_SetDataCompleteCallback (2 , &U _wr1RegCompleteHandler -> &U _data `*v ]
+"42
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 42:     I2C1_SetBuffer(&reg,1);
+[e ( _I2C1_SetBuffer (2 , -> &U _reg `*v -> -> 1 `i `ui ]
+"43
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 43:     I2C1_SetAddressNackCallback(((void*)0),((void*)0));
+[e ( _I2C1_SetAddressNackCallback (2 , -> -> -> 0 `i `*v `*F470 -> -> 0 `i `*v ]
+"44
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 44:     I2C1_MasterWrite();
+[e ( _I2C1_MasterWrite ..  ]
+"45
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 45:     while(I2C1_BUSY == I2C1_Close());
+[e $U 8  ]
+[e :U 9 ]
+[e :U 8 ]
+[e $ == -> . `E355 1 `ui -> ( _I2C1_Close ..  `ui 9  ]
+[e :U 10 ]
+"46
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 46: }
+[e :UE 4 ]
+}
+"48
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 48: void i2c_writeNBytes(i2c1_address_t address, void* data, size_t len)
+[v _i2c_writeNBytes `(v ~T0 @X0 1 ef3`uc`*v`ui ]
+"49
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 49: {
+{
+[e :U _i2c_writeNBytes ]
+"48
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 48: void i2c_writeNBytes(i2c1_address_t address, void* data, size_t len)
+[v _address `uc ~T0 @X0 1 r1 ]
+[v _data `*v ~T0 @X0 1 r2 ]
+[v _len `ui ~T0 @X0 1 r3 ]
+"49
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 49: {
+[f ]
+"50
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 50:     while(!I2C1_Open(address));
+[e $U 12  ]
+[e :U 13 ]
+[e :U 12 ]
+[e $ ! != -> ( _I2C1_Open (1 _address `ui -> -> 0 `i `ui 13  ]
+[e :U 14 ]
+"51
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 51:     I2C1_SetBuffer(data,len);
+[e ( _I2C1_SetBuffer (2 , _data _len ]
+"52
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 52:     I2C1_SetAddressNackCallback(((void*)0),((void*)0));
+[e ( _I2C1_SetAddressNackCallback (2 , -> -> -> 0 `i `*v `*F476 -> -> 0 `i `*v ]
+"53
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 53:     I2C1_MasterWrite();
+[e ( _I2C1_MasterWrite ..  ]
+"54
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 54:     while(I2C1_BUSY == I2C1_Close());
+[e $U 15  ]
+[e :U 16 ]
+[e :U 15 ]
+[e $ == -> . `E355 1 `ui -> ( _I2C1_Close ..  `ui 16  ]
+[e :U 17 ]
+"55
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 55: }
+[e :UE 11 ]
+}
+"58
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 58: static i2c1_operations_t rd1RegCompleteHandler(void *p)
+[v _rd1RegCompleteHandler `(E360 ~T0 @X0 1 sf1`*v ]
+"59
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 59: {
+{
+[e :U _rd1RegCompleteHandler ]
+"58
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 58: static i2c1_operations_t rd1RegCompleteHandler(void *p)
+[v _p `*v ~T0 @X0 1 r1 ]
+"59
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 59: {
+[f ]
+"60
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 60:     I2C1_SetBuffer(p,1);
+[e ( _I2C1_SetBuffer (2 , _p -> -> 1 `i `ui ]
+"61
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 61:     I2C1_SetDataCompleteCallback(((void*)0),((void*)0));
+[e ( _I2C1_SetDataCompleteCallback (2 , -> -> -> 0 `i `*v `*F480 -> -> 0 `i `*v ]
+"62
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 62:     return I2C1_RESTART_READ;
+[e ) . `E360 1 ]
+[e $UE 18  ]
+"63
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 63: }
+[e :UE 18 ]
+}
+"65
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 65: uint8_t i2c_read1ByteRegister(i2c1_address_t address, uint8_t reg)
+[v _i2c_read1ByteRegister `(uc ~T0 @X0 1 ef2`uc`uc ]
+"66
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 66: {
+{
+[e :U _i2c_read1ByteRegister ]
+"65
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 65: uint8_t i2c_read1ByteRegister(i2c1_address_t address, uint8_t reg)
+[v _address `uc ~T0 @X0 1 r1 ]
+[v _reg `uc ~T0 @X0 1 r2 ]
+"66
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 66: {
+[f ]
+"67
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 67:     uint8_t d2=42;
+[v _d2 `uc ~T0 @X0 1 a ]
+[e = _d2 -> -> 42 `i `uc ]
+"68
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 68:     i2c1_error_t e;
+[v _e `E355 ~T0 @X0 1 a ]
+"69
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 69:     int x;
+[v _x `i ~T0 @X0 1 a ]
+"71
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 71:     for(x = 2; x != 0; x--)
+{
+[e = _x -> 2 `i ]
+[e $ != _x -> 0 `i 20  ]
+[e $U 21  ]
+[e :U 20 ]
+"72
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 72:     {
+{
+"73
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 73:         while(!I2C1_Open(address));
+[e $U 23  ]
+[e :U 24 ]
+[e :U 23 ]
+[e $ ! != -> ( _I2C1_Open (1 _address `ui -> -> 0 `i `ui 24  ]
+[e :U 25 ]
+"74
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 74:         I2C1_SetDataCompleteCallback(rd1RegCompleteHandler,&d2);
+[e ( _I2C1_SetDataCompleteCallback (2 , &U _rd1RegCompleteHandler -> &U _d2 `*v ]
+"75
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 75:         I2C1_SetBuffer(&reg,1);
+[e ( _I2C1_SetBuffer (2 , -> &U _reg `*v -> -> 1 `i `ui ]
+"76
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 76:         I2C1_SetAddressNackCallback(((void*)0),((void*)0));
+[e ( _I2C1_SetAddressNackCallback (2 , -> -> -> 0 `i `*v `*F490 -> -> 0 `i `*v ]
+"77
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 77:         I2C1_MasterWrite();
+[e ( _I2C1_MasterWrite ..  ]
+"78
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 78:         while(I2C1_BUSY == (e = I2C1_Close()));
+[e $U 26  ]
+[e :U 27 ]
+[e :U 26 ]
+[e $ == -> . `E355 1 `ui -> = _e ( _I2C1_Close ..  `ui 27  ]
+[e :U 28 ]
+"79
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 79:         if(e==I2C1_NOERR) break;
+[e $ ! == -> _e `ui -> . `E355 0 `ui 29  ]
+[e $U 21  ]
+[e :U 29 ]
+"80
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 80:     }
+}
+[e -- _x -> 1 `i ]
+[e $ != _x -> 0 `i 20  ]
+[e :U 21 ]
+}
+"83
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 83:     return d2;
+[e ) _d2 ]
+[e $UE 19  ]
+"84
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 84: }
+[e :UE 19 ]
+}
+"87
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 87: static i2c1_operations_t rd2RegCompleteHandler(void *p)
+[v _rd2RegCompleteHandler `(E360 ~T0 @X0 1 sf1`*v ]
+"88
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 88: {
+{
+[e :U _rd2RegCompleteHandler ]
+"87
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 87: static i2c1_operations_t rd2RegCompleteHandler(void *p)
+[v _p `*v ~T0 @X0 1 r1 ]
+"88
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 88: {
+[f ]
+"89
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 89:     I2C1_SetBuffer(p,2);
+[e ( _I2C1_SetBuffer (2 , _p -> -> 2 `i `ui ]
+"90
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 90:     I2C1_SetDataCompleteCallback(((void*)0),((void*)0));
+[e ( _I2C1_SetDataCompleteCallback (2 , -> -> -> 0 `i `*v `*F494 -> -> 0 `i `*v ]
+"91
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 91:     return I2C1_RESTART_READ;
+[e ) . `E360 1 ]
+[e $UE 30  ]
+"92
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 92: }
+[e :UE 30 ]
+}
+"94
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 94: uint16_t i2c_read2ByteRegister(i2c1_address_t address, uint8_t reg)
+[v _i2c_read2ByteRegister `(us ~T0 @X0 1 ef2`uc`uc ]
+"95
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 95: {
+{
+[e :U _i2c_read2ByteRegister ]
+"94
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 94: uint16_t i2c_read2ByteRegister(i2c1_address_t address, uint8_t reg)
+[v _address `uc ~T0 @X0 1 r1 ]
+[v _reg `uc ~T0 @X0 1 r2 ]
+"95
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 95: {
+[f ]
+"97
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 97:     uint16_t result;
+[v _result `us ~T0 @X0 1 a ]
+"99
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 99:     while(!I2C1_Open(address));
+[e $U 32  ]
+[e :U 33 ]
+[e :U 32 ]
+[e $ ! != -> ( _I2C1_Open (1 _address `ui -> -> 0 `i `ui 33  ]
+[e :U 34 ]
+"100
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 100:     I2C1_SetDataCompleteCallback(rd2RegCompleteHandler,&result);
+[e ( _I2C1_SetDataCompleteCallback (2 , &U _rd2RegCompleteHandler -> &U _result `*v ]
+"101
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 101:     I2C1_SetBuffer(&reg,1);
+[e ( _I2C1_SetBuffer (2 , -> &U _reg `*v -> -> 1 `i `ui ]
+"102
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 102:     I2C1_SetAddressNackCallback(((void*)0),((void*)0));
+[e ( _I2C1_SetAddressNackCallback (2 , -> -> -> 0 `i `*v `*F502 -> -> 0 `i `*v ]
+"103
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 103:     I2C1_MasterWrite();
+[e ( _I2C1_MasterWrite ..  ]
+"104
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 104:     while(I2C1_BUSY == I2C1_Close());
+[e $U 35  ]
+[e :U 36 ]
+[e :U 35 ]
+[e $ == -> . `E355 1 `ui -> ( _I2C1_Close ..  `ui 36  ]
+[e :U 37 ]
+"106
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 106:     return (result << 8 | result >> 8);
+[e ) -> | << -> _result `ui -> 8 `i >> -> _result `ui -> 8 `i `us ]
+[e $UE 31  ]
+"107
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 107: }
+[e :UE 31 ]
+}
+"110
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 110: static i2c1_operations_t wr2RegCompleteHandler(void *p)
+[v _wr2RegCompleteHandler `(E360 ~T0 @X0 1 sf1`*v ]
+"111
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 111: {
+{
+[e :U _wr2RegCompleteHandler ]
+"110
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 110: static i2c1_operations_t wr2RegCompleteHandler(void *p)
+[v _p `*v ~T0 @X0 1 r1 ]
+"111
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 111: {
+[f ]
+"112
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 112:     I2C1_SetBuffer(p,2);
+[e ( _I2C1_SetBuffer (2 , _p -> -> 2 `i `ui ]
+"113
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 113:     I2C1_SetDataCompleteCallback(((void*)0),((void*)0));
+[e ( _I2C1_SetDataCompleteCallback (2 , -> -> -> 0 `i `*v `*F506 -> -> 0 `i `*v ]
+"114
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 114:     return I2C1_CONTINUE;
+[e ) . `E360 3 ]
+[e $UE 38  ]
+"115
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 115: }
+[e :UE 38 ]
+}
+"117
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 117: void i2c_write2ByteRegister(i2c1_address_t address, uint8_t reg, uint16_t data)
+[v _i2c_write2ByteRegister `(v ~T0 @X0 1 ef3`uc`uc`us ]
+"118
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 118: {
+{
+[e :U _i2c_write2ByteRegister ]
+"117
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 117: void i2c_write2ByteRegister(i2c1_address_t address, uint8_t reg, uint16_t data)
+[v _address `uc ~T0 @X0 1 r1 ]
+[v _reg `uc ~T0 @X0 1 r2 ]
+[v _data `us ~T0 @X0 1 r3 ]
+"118
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 118: {
+[f ]
+"119
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 119:     while(!I2C1_Open(address));
+[e $U 40  ]
+[e :U 41 ]
+[e :U 40 ]
+[e $ ! != -> ( _I2C1_Open (1 _address `ui -> -> 0 `i `ui 41  ]
+[e :U 42 ]
+"120
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 120:     I2C1_SetDataCompleteCallback(wr2RegCompleteHandler,&data);
+[e ( _I2C1_SetDataCompleteCallback (2 , &U _wr2RegCompleteHandler -> &U _data `*v ]
+"121
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 121:     I2C1_SetBuffer(&reg,1);
+[e ( _I2C1_SetBuffer (2 , -> &U _reg `*v -> -> 1 `i `ui ]
+"122
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 122:     I2C1_SetAddressNackCallback(((void*)0),((void*)0));
+[e ( _I2C1_SetAddressNackCallback (2 , -> -> -> 0 `i `*v `*F514 -> -> 0 `i `*v ]
+"123
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 123:     I2C1_MasterWrite();
+[e ( _I2C1_MasterWrite ..  ]
+"124
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 124:     while(I2C1_BUSY == I2C1_Close());
+[e $U 43  ]
+[e :U 44 ]
+[e :U 43 ]
+[e $ == -> . `E355 1 `ui -> ( _I2C1_Close ..  `ui 44  ]
+[e :U 45 ]
+"125
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 125: }
+[e :UE 39 ]
+}
+"134
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 134: static i2c1_operations_t rdBlkRegCompleteHandler(void *p)
+[v _rdBlkRegCompleteHandler `(E360 ~T0 @X0 1 sf1`*v ]
+"135
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 135: {
+{
+[e :U _rdBlkRegCompleteHandler ]
+"134
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 134: static i2c1_operations_t rdBlkRegCompleteHandler(void *p)
+[v _p `*v ~T0 @X0 1 r1 ]
+"135
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 135: {
+[f ]
+"136
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 136:     I2C1_SetBuffer(((buf_t *)p)->data,((buf_t*)p)->len);
+[e ( _I2C1_SetBuffer (2 , -> . *U -> _p `*S46 1 `*v . *U -> _p `*S46 0 ]
+"137
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 137:     I2C1_SetDataCompleteCallback(((void*)0),((void*)0));
+[e ( _I2C1_SetDataCompleteCallback (2 , -> -> -> 0 `i `*v `*F522 -> -> 0 `i `*v ]
+"138
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 138:     return I2C1_RESTART_READ;
+[e ) . `E360 1 ]
+[e $UE 47  ]
+"139
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 139: }
+[e :UE 47 ]
+}
+"141
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 141: void i2c_readDataBlock(i2c1_address_t address, uint8_t reg, void *data, size_t len)
+[v _i2c_readDataBlock `(v ~T0 @X0 1 ef4`uc`uc`*v`ui ]
+"142
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 142: {
+{
+[e :U _i2c_readDataBlock ]
+"141
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 141: void i2c_readDataBlock(i2c1_address_t address, uint8_t reg, void *data, size_t len)
+[v _address `uc ~T0 @X0 1 r1 ]
+[v _reg `uc ~T0 @X0 1 r2 ]
+[v _data `*v ~T0 @X0 1 r3 ]
+[v _len `ui ~T0 @X0 1 r4 ]
+"142
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 142: {
+[f ]
+"144
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 144:     buf_t d;
+[v _d `S46 ~T0 @X0 1 a ]
+"145
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 145:     d.data = data;
+[e = . _d 1 -> _data `*uc ]
+"146
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 146:     d.len = len;
+[e = . _d 0 _len ]
+"148
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 148:     while(!I2C1_Open(address));
+[e $U 49  ]
+[e :U 50 ]
+[e :U 49 ]
+[e $ ! != -> ( _I2C1_Open (1 _address `ui -> -> 0 `i `ui 50  ]
+[e :U 51 ]
+"149
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 149:     I2C1_SetDataCompleteCallback(rdBlkRegCompleteHandler,&d);
+[e ( _I2C1_SetDataCompleteCallback (2 , &U _rdBlkRegCompleteHandler -> &U _d `*v ]
+"150
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 150:     I2C1_SetBuffer(&reg,1);
+[e ( _I2C1_SetBuffer (2 , -> &U _reg `*v -> -> 1 `i `ui ]
+"151
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 151:     I2C1_SetAddressNackCallback(((void*)0),((void*)0));
+[e ( _I2C1_SetAddressNackCallback (2 , -> -> -> 0 `i `*v `*F532 -> -> 0 `i `*v ]
+"152
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 152:     I2C1_MasterWrite();
+[e ( _I2C1_MasterWrite ..  ]
+"153
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 153:     while(I2C1_BUSY == I2C1_Close());
+[e $U 52  ]
+[e :U 53 ]
+[e :U 52 ]
+[e $ == -> . `E355 1 `ui -> ( _I2C1_Close ..  `ui 53  ]
+[e :U 54 ]
+"154
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 154: }
+[e :UE 48 ]
+}
+"156
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 156: void i2c_readNBytes(i2c1_address_t address, void *data, size_t len)
+[v _i2c_readNBytes `(v ~T0 @X0 1 ef3`uc`*v`ui ]
+"157
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 157: {
+{
+[e :U _i2c_readNBytes ]
+"156
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 156: void i2c_readNBytes(i2c1_address_t address, void *data, size_t len)
+[v _address `uc ~T0 @X0 1 r1 ]
+[v _data `*v ~T0 @X0 1 r2 ]
+[v _len `ui ~T0 @X0 1 r3 ]
+"157
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 157: {
+[f ]
+"158
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 158:     while(!I2C1_Open(address));
+[e $U 56  ]
+[e :U 57 ]
+[e :U 56 ]
+[e $ ! != -> ( _I2C1_Open (1 _address `ui -> -> 0 `i `ui 57  ]
+[e :U 58 ]
+"159
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 159:     I2C1_SetBuffer(data,len);
+[e ( _I2C1_SetBuffer (2 , _data _len ]
+"160
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 160:     I2C1_MasterRead();
+[e ( _I2C1_MasterRead ..  ]
+"161
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 161:     while(I2C1_BUSY == I2C1_Close());
+[e $U 59  ]
+[e :U 60 ]
+[e :U 59 ]
+[e $ == -> . `E355 1 `ui -> ( _I2C1_Close ..  `ui 60  ]
+[e :U 61 ]
+"162
+[; ;mcc_generated_files/drivers/i2c_simple_master.c: 162: }
+[e :UE 55 ]
+}
