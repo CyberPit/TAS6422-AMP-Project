@@ -28,7 +28,9 @@ extern unsigned char   current_aux;
 extern unsigned char   current_fs;
 extern signed char     current_balance;
 extern signed char     current_direction;
+extern signed char     current_hpf;
 
+const char lcd_hpf_fc[9][7] = { "4Hz  ", "8Hz  ", "15Hz  ","30Hz  ", "59Hz  ", "118Hz ", "235Hz ","463Hz ", "BYP  "};
 
 // MUSIC SOURCE SELECT ITEMS
 const char lcd_src_name[5][8] = {"COAXIAL","OPTICAL", "ADC    ",  "HDMI   ", "I2S    "};
@@ -46,7 +48,7 @@ uint8_t   pfspo,ocdc, otshut, otwarn,clip,ilim,prail;
     i2c_lcd_puts(lcdbuff);     
 
    i2c_lcd_set_cursor_pos(0, 1);
-    sprintf(lcdbuff,"AUX:%s HPF:%s", lcd_aux_name[current_direction %2],lcd_aux_name[0]);
+    sprintf(lcdbuff,"AUX:%s HPF:%s", lcd_aux_name[current_direction %2], lcd_hpf_fc[current_hpf]);
     i2c_lcd_puts(lcdbuff);     
   
     pfspo = i2c_read1ByteRegister(ADR_PCM9211, 0x38);

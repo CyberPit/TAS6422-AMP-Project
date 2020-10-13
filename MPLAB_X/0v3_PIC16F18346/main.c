@@ -59,17 +59,19 @@
 //#include <stdint.h>
 #include <stdio.h>
 #include <string.h>
-// EE Address Labels
-#define     EE_FACTORY  0x00
-#define     EE_VOLUME   0x10
-#define     EE_BALANCE  0x11
-#define     EE_SOURCE    0x12
-#define     EE_AUXDIRECTION 0x13
+// EEPROM Address Labels
+#define     EE_FACTORY              0xF010  // Ideity to know  initalize EEPROM
+#define     EE_VOLUME               0xF011  // TAS6422 Volume Setting
+#define     EE_BALANCE              0xF012  // TAS6422 Input offset Setting
+#define     EE_SOURCE                0xF013  // PCM9211 Input
+#define     EE_AUXDIRECTION      0xF014  //  PCM9211 Group-B Setting
+#define     EE_HPF                       0xF015  //-6dB per octave High Pass Filter Setting
+#define     EE_UOL                      0xF016  // User Oriented Volume Setting
 #define     I2S_INPMODE     0
 #define     I2S_OUTMODE   1
 // Values for EE
-#define     YES_FACTORY  0xff
-#define     NON_FACTORY 0x00
+#define     YES_FACTORY  0xC5     // Defult EEPROM Value Loaded Flag
+#define     NON_FACTORY 0x5C    // Idetifier Not to initialize EEPROM
 
 
 extern char ledstr[], ledbuff[], blink_rate[]; // for 3digits LED
@@ -81,10 +83,13 @@ static  unsigned char tasbuff[2];   // offset_adrr, reg_value
 static char gain;
 static unsigned char   current_source;
 static unsigned char   current_volume;
+static unsigned char   stored_volume;
 static unsigned char   current_aux;
 static unsigned char   current_fs;
 static signed char       current_balance;
 static signed char      current_direction;  // Port B  as AUX I2S direction
+static signed char      current_hpf;          // HPF Setting 0-7, 8 is OFF
+static signed char      current_uol;          // Startup volume setting (0=Last Saved)
 
 // Fixed Message String
 //Opening Message
@@ -95,6 +100,8 @@ const char led_fs_name[6][7] = { "44.1", " 48", " 88.2"," 96", "176", "192"};
 const char led_i2s_dir[2][7] = { "1np", "Out" };
   // MUSIC SOURCE SELECT ITEMS
 const char led_src_name[5][7] = { "COA", "OPT", "AdC", "HDM",  "12S"};
+ //HPF Selection Items
+const char led_hpf_fc[9][7] = { "  4", "  8", " 15"," 30", " 59", "118", "235","463", "oFF"};
 
 void puts_led(char *str)
 {
@@ -130,7 +137,6 @@ cpoint =(unsigned char *)(str);  // Pint Strings top
 
 }
 
-
 // Set Gain on LED
 void    set_gainstr(unsigned char gval)
 {
@@ -158,6 +164,36 @@ else
          }
  puts_led(ledstr);
 }
+
+
+// Show  UOL Setting on LED
+void    show_uolstr(unsigned char gval)
+{
+if (gval <9)
+         strcpy( ledstr, "LAS");
+else   
+         {
+         if (gval > 0xba)  // Wehn above -10dB
+                  {                              
+                   gain = (signed char) (((signed int)gval - (signed int)0x00cf)/2);
+                   sprintf(ledstr, "%2d", (signed char)gain);
+                   if (gval == 0xce)
+                           ledstr[0] = 0x2d;  // Display '-'
+                   if(gval & 0x01)
+                           strcat(ledstr, ".0 ");
+                   else  strcat(ledstr, ".5 ");
+                  }
+         else
+                  {
+                  gain =(signed char)((((int)gval - (int)0xcf))/2);
+                  sprintf(ledstr, "%3d",(signed char)gain);
+                  if((gval & 0x01) != 0x01)
+                           strcat (ledstr, ".");
+                  }
+         }
+ puts_led(ledstr);
+}
+
 // PCM9211 Setting Data Table
 typedef struct  
     {
@@ -278,7 +314,13 @@ i2c_writeNBytes(ADR_PCM9211,&ADC_ATTR_3dB, 2 );
  i2c_writeNBytes(ADR_PCM9211,&CALC_MOUT, 2); // Check the Main Out fs
 }
 
-
+void write_tas6422(unsigned char adr, unsigned char val)
+{
+static char  buffer[2];
+ buffer[0] = adr;
+ buffer[1] = val;
+i2c_writeNBytes(ADR_TAS6422,&buffer, 2); // Write val to offser=adr
+}
 void init_tas6422(void)
 {
 i2c_writeNBytes(ADR_TAS6422,&TAS_RESET, 2 );
@@ -371,14 +413,14 @@ i2c_writeNBytes(ADR_TAS6422, &TAS_NORMAL, 2 );   // Run TAS6422
 
 
 /*
-                         Main application
+ --------------------   Main application -------------------- 
  */
 void main(void)
 {
     static unsigned char count;
     char level;
     unsigned char textlen;
- 
+    unsigned int    vol_move_cnt=0;
     
    // signed char gain;
     
@@ -401,22 +443,31 @@ void main(void)
     DELAY_milliseconds(100);  // Wiat for a Hardware stable
     
     // Restore Saved Values or Factory preset
- if(DATAEE_ReadByte(EE_FACTORY == YES_FACTORY))
+ if(DATAEE_ReadByte(EE_FACTORY) == NON_FACTORY)
+          {
+        // Only NON_FACTORY restore from EEPROM
+         current_balance   = DATAEE_ReadByte(EE_BALANCE);
+        current_source    = DATAEE_ReadByte(EE_SOURCE);
+        current_direction = DATAEE_ReadByte(EE_AUXDIRECTION);
+        current_hpf          = DATAEE_ReadByte(EE_HPF);
+        current_uol          = DATAEE_ReadByte(EE_UOL);
+        stored_volume  = DATAEE_ReadByte(EE_VOLUME);
+        if( current_uol == 0)
+                current_volume  = stored_volume;
+        else    current_volume  = stored_volume = current_uol;
+       }
+ else
         {
-        // Load Factory defaults
-         DATAEE_WriteByte(EE_VOLUME, current_volume=146);
+        //Otherwise  Load Factory defaults
+         DATAEE_WriteByte(EE_VOLUME, current_volume=stored_volume =146);
          DATAEE_WriteByte(EE_BALANCE, current_balance=0);
          DATAEE_WriteByte(EE_SOURCE, current_source=2);
          DATAEE_WriteByte(EE_AUXDIRECTION, current_direction = I2S_INPMODE);
-        }
-else
-        {
-        // Or restore from EEPROM
-        current_volume   = DATAEE_ReadByte(EE_VOLUME);
-        current_balance   = DATAEE_ReadByte(EE_BALANCE);
-        current_source    = DATAEE_ReadByte(EE_SOURCE);
-        current_direction = DATAEE_ReadByte(EE_AUXDIRECTION);
-        }
+         DATAEE_WriteByte(EE_HPF, current_hpf = 0);
+         DATAEE_WriteByte(EE_UOL, current_uol = 0);
+         DATAEE_WriteByte(EE_FACTORY, YES_FACTORY);
+         }
+
 
   // Power-On Initialize
      init_pcm9211();
@@ -440,15 +491,16 @@ else
 i2c_writeNBytes(ADR_TAS6422, &TAS_CLEAR_FALT, 2 );   // Run TAS6422
 i2c_writeNBytes(ADR_TAS6422, &TAS_NORMAL, 2 );   // Run TAS6422
 
-  set_source(current_source);
+set_source(current_source);
+vol_move_cnt = 0;
 // LED Setup
 blink_rate[2]= blink_rate[1]=blink_rate[0]=0; // No blink
-puts_led("FAd");
+puts_led("HL0"); // Firmware Version String Notice
 DELAY_milliseconds(1000);
 
 
 lcd_disp_param();
-current_volume = RE_pos;
+//current_volume = RE_pos;
 set_gainstr(current_volume);
     while (1)
         {
@@ -458,7 +510,7 @@ set_gainstr(current_volume);
                     puts_led("SOC");
                     button1 = NOT_PUSHED;   // Clear for nettime
                     DELAY_milliseconds(800);
-                    puts_led("　　　");
+                    puts_led("   ");
                     DELAY_milliseconds(200);
                     button1 = NOT_PUSHED;   // Clear for nettime
                   
@@ -469,7 +521,7 @@ set_gainstr(current_volume);
                          lcd_disp_param();
                          current_source = RE_pos;
                         }
-                    button1 = NOT_PUSHED;   // Clear for nettime
+                    button1 = NOT_PUSHED;   // Clear for nexttime
 //                    MUTEn_SetLow(); // Muting start
                     i2c_writeNBytes(ADR_TAS6422,&TAS_MUTE, 2 );
                     DATAEE_WriteByte(EE_FACTORY, NON_FACTORY); // Erace Factory Mode flag
@@ -488,11 +540,11 @@ set_gainstr(current_volume);
                      DATAEE_WriteByte(EE_FACTORY, NON_FACTORY); // Erace Factory Mode flag
                     RE_pos = 64 + current_balance ;  
                     puts_led("BAL");
-                    DELAY_milliseconds(800);
-                    puts_led("　　　");
+                    DELAY_milliseconds(900);
+                    puts_led("   ");
                     DELAY_milliseconds(200);
                     blink_rate[2]= blink_rate[1]=blink_rate[0]=1; // blink LED
-                    button1 = NOT_PUSHED;   // Clear for nettime
+                    button1 = NOT_PUSHED;   // Clear for nexttime
                     while (button1 == NOT_PUSHED)
                         {
                         sprintf(ledbuff, "%03d",(current_balance=(signed char)(RE_pos-64)));
@@ -500,21 +552,77 @@ set_gainstr(current_volume);
                         lcd_disp_param();
                         }
                     button1 = NOT_PUSHED;   // Clear for nettime
-
                     DATAEE_WriteByte(EE_BALANCE, current_balance);
                     blink_rate[2]= blink_rate[1]=blink_rate[0]=0; // No  blink
                     sprintf(ledbuff, "%03d",current_balance);
                     set_gains(current_volume, current_balance);
                     puts_led(ledbuff);
                     DELAY_milliseconds(1400);
+                    puts_led("   ");
+                    DELAY_milliseconds(800);
+ 
+                    // HPF Setup
+                    RE_pos = current_hpf;  
+                    puts_led("HPF");
+                    DELAY_milliseconds(900);
+                    puts_led("   ");
+                    DELAY_milliseconds(200);
+                    blink_rate[2]= blink_rate[1]=blink_rate[0]=1; // blink LED
+                    button1 = NOT_PUSHED;   // Clear for nexttime
+                    while (button1 == NOT_PUSHED)
+                        {
+                        current_hpf = RE_pos%9;
+                        strcpy(ledbuff,  led_hpf_fc[current_hpf]);
+                        puts_led(ledbuff);
+                        lcd_disp_param();
+                        }
+                    button1 = NOT_PUSHED;   // Clear for nettime
+                    DATAEE_WriteByte(EE_HPF, current_hpf);
+                    blink_rate[2]= blink_rate[1]=blink_rate[0]=0; // No  blink
+                    if( current_hpf == 8)
+                              i2c_writeNBytes(ADR_TAS6422,&TAS_DC, 2 );  
+                    else  {  
+                            i2c_writeNBytes(ADR_TAS6422,&TAS_AC, 2 ); 
+                            write_tas6422( 0x26, current_hpf);
+                            }
+                    strcpy(ledbuff,  led_hpf_fc[current_hpf]);
+                    puts_led(ledbuff);
+                    DELAY_milliseconds(1500);
+                    puts_led("   ");
+                    DELAY_milliseconds(800);
+                    
+                    // Startup Volume Setup
+                    RE_pos = current_uol;  
+                    puts_led("UOL");
+                    DELAY_milliseconds(900);
+                    puts_led("   ");
+                    DELAY_milliseconds(200);
+                    blink_rate[2]= blink_rate[1]=blink_rate[0]=1; // blink LED
+                    button1 = NOT_PUSHED;   // Clear for nexttime
+                    while (button1 == NOT_PUSHED)
+                        {
+                        current_uol = RE_pos;
+                        show_uolstr(current_uol);
+                        }
+                    button1 = NOT_PUSHED;   // Clear for nettime
+                    DATAEE_WriteByte(EE_UOL, current_uol);
+                    blink_rate[2]= blink_rate[1]=blink_rate[0]=0; // No  blink
+                    if( current_uol != 0)
+                       strcpy(ledbuff,  "SET");
+                    puts_led(ledbuff);
+                    DELAY_milliseconds(800);
+                    puts_led("   ");
+                    DELAY_milliseconds(800);
+
+                    
                     // AUX (I2S) Direction Setup
                     RE_pos = current_direction;  
                     puts_led("12S");
-                    DELAY_milliseconds(800);
-                    puts_led("　　　");
+                    DELAY_milliseconds(900);
+                    puts_led("   ");
                     DELAY_milliseconds(200);
                     blink_rate[2]= blink_rate[1]=blink_rate[0]=1; // blink LED
-                    button1 = NOT_PUSHED;   // Clear for nettime
+                    button1 = NOT_PUSHED;   // Clear for nexttime
                     while (button1 == NOT_PUSHED)
                         {
                         current_direction = RE_pos%2;
@@ -530,15 +638,21 @@ set_gainstr(current_volume);
                     else    i2c_writeNBytes(ADR_PCM9211,&I2S_IN, 2 ); 
                     strcpy(ledbuff,  led_i2s_dir[current_direction]);
                     puts_led(ledbuff);
-                    DELAY_milliseconds(1400);
+                    DELAY_milliseconds(1500);
 
-                    
+                    // Inidicate as Seeting mode Finished
+                    puts_led("   ");
+                    DELAY_milliseconds(800);
+                    puts_led("FAd");
+                    DELAY_milliseconds(500);
+                   
                     // Restore Setting for Volume Loop Mode
                     RE_pos = current_volume;
                     set_gainstr(current_volume);
                     lcd_disp_param();
-                    button1 = NOT_PUSHED;   // Clear for nettime
+                    button1 = NOT_PUSHED;   // Clear for nexttime
                     }     
+
          if (current_volume != RE_pos) // When moved
                     {
                     current_volume =  RE_pos;    // update psition
@@ -551,12 +665,17 @@ set_gainstr(current_volume);
                 {
              case 0x08: // 44.1kHz
                     i2c_writeNBytes(ADR_TAS6422,&TAS_FS44K, 2 );
-                    break;
+                   write_tas6422( 0x26, (current_hpf));
+                   break;
              case 0x09:
                     i2c_writeNBytes(ADR_TAS6422,&TAS_FS48K, 2 );
-                    break;
-             case 0x0c:
+                   write_tas6422( 0x26, (current_hpf));
+                   break;
+            case 0x0b:
+            case 0x0c:
                     i2c_writeNBytes(ADR_TAS6422,&TAS_FS96K, 2 );
+                    if (current_hpf)
+                   write_tas6422( 0x26, (current_hpf - 1)); // Compnsate cutoff frequency
                     break;
                  }
          i2c_read1ByteRegister(ADR_PCM9211, 0x2d); // Dummy read for clear the Analog signal LED
@@ -566,6 +685,14 @@ set_gainstr(current_volume);
                 i2c_writeNBytes(ADR_TAS6422, &TAS_CLEAR_FALT, 2 );   // Run TAS6422
                 i2c_writeNBytes(ADR_TAS6422, &TAS_NORMAL, 2 );   // Run TAS6422
                 }
+         if (current_volume != stored_volume)
+             if ( vol_move_cnt++ > 900)
+                {
+ //                   puts_led("VOL");  // To check the EEPROM overwrite timing
+                 stored_volume = current_volume;
+                 DATAEE_WriteByte(EE_VOLUME,   stored_volume);
+                vol_move_cnt = 0;
+                 }
          }
  // Disable the Global Interrupts
  //INTERRUPT_GlobalInterruptDisable();
