@@ -224,6 +224,9 @@ Command9211     CALC_MPIB  ={0x37, 0x03};
 Command9211     CALC_MOUT  ={0x37, 0x05}; 
 Command9211     CALC_MPOB  ={0x37, 0x06}; 
 Command9211     CALC_DIT      ={0x37, 0x07}; 
+// Power Down Standby
+Command9211     PWDOWN      ={0x40, 0xF3};
+Command9211     PWUP            ={0x40, 0xC0};
 // ADC ReGain
 Command9211     ADC_ATTL_0dB = { 0x46, 215 };// Default Sens
 Command9211     ADC_ATTR_0dB = { 0x47, 215 };// Default Sens
@@ -338,7 +341,8 @@ MUTEn_SetHigh();
 
 char    chk6422warning(void)
 {
-static uint8_t   lasttime, ocdc, otshut, otwarn,clip,ilim,prail;
+static uint16_t  lasttime=0;
+static uint8_t    ocdc, otshut, otwarn,clip,ilim,prail;
     ocdc    = i2c_read1ByteRegister(ADR_TAS6422, 0x10);  
     otwarn = i2c_read1ByteRegister(ADR_TAS6422, 0x13);
     clip       = i2c_read1ByteRegister(ADR_TAS6422, 0x24);
@@ -427,9 +431,13 @@ void main(void)
     // initialize the device
     SYSTEM_Initialize();
     DELAY_milliseconds(500);
-    // Enable the Global Interrupts
-    TMR1_Initialize();    // add
-    TMR1_StartTimer();
+    MUTEn_SetDigitalOutput(); 
+    MUTEn_SetOpenDrain();   // STBYm Control both uP and Header-Pin
+    MUTEn_SetHigh();
+    
+   // Enable the Global Interrupts
+      TMR1_Initialize();    // add
+      TMR1_StartTimer();
      // add
      PIE1bits.TMR1IE = 1;	// TMR1 Overflow Interrupt Enable bit
      INTCONbits.PEIE = 1;	// Peripheral Interrupt Enable bit
@@ -477,7 +485,7 @@ void main(void)
     i2c_lcd_init();                                                                   
     i2c_lcd_ulcursor_off();     
     i2c_lcd_home(); //         i2c_lcd_set_cursor_pos(0, 0);
-    sprintf(lcdbuff,"Firmware: 2020OCT11"); 
+    sprintf(lcdbuff,"Firmware:16 Oct.2020"); 
     i2c_lcd_puts(lcdbuff);  
     DELAY_milliseconds(800); 
     i2c_lcd_clear();
@@ -504,7 +512,7 @@ lcd_disp_param();
 set_gainstr(current_volume);
     while (1)
         {
-        if (button1 == SHORT_PUSHED)
+        if (button1 == SHORT_PUSHED) // Then Source Select Operation
                     {
                     RE_pos = current_source;  
                     puts_led("SOC");
@@ -534,7 +542,7 @@ set_gainstr(current_volume);
  //                    MUTEn_SetHigh(); // Muting release
                     i2c_writeNBytes(ADR_TAS6422,&TAS_PLAY, 2 );
                  }
-        if (button1 == LONG_PUSHED)
+        if (button1 == LONG_PUSHED) // Then Stored Parameter Change Operation
                     {
                     // Balance Settup
                      DATAEE_WriteByte(EE_FACTORY, NON_FACTORY); // Erace Factory Mode flag
@@ -657,7 +665,7 @@ set_gainstr(current_volume);
                     {
                     current_volume =  RE_pos;    // update psition
                     set_gainstr(current_volume);
-                    set_gains(current_volume, current_balance); //  Default Volume Level
+                    set_gains(current_volume, current_balance); //  Set gains from Volume/Balance Setting
                     lcd_disp_param();
                    puts_led(ledstr);
                    }
@@ -682,17 +690,32 @@ set_gainstr(current_volume);
          if (chk6422warning())
                 {
                 lcd_disp_param();
-                i2c_writeNBytes(ADR_TAS6422, &TAS_CLEAR_FALT, 2 );   // Run TAS6422
+               }
+                i2c_writeNBytes(ADR_TAS6422, &TAS_CLEAR_FALT, 2 );   // TAS6422 Clear faultr flags
                 i2c_writeNBytes(ADR_TAS6422, &TAS_NORMAL, 2 );   // Run TAS6422
-                }
-         if (current_volume != stored_volume)
-             if ( vol_move_cnt++ > 900)
+          if (current_volume != stored_volume) // When Volume changs found
+             if ( vol_move_cnt++ > 900) // Update change count and if over 900mS
                 {
- //                   puts_led("VOL");  // To check the EEPROM overwrite timing
                  stored_volume = current_volume;
-                 DATAEE_WriteByte(EE_VOLUME,   stored_volume);
+                 DATAEE_WriteByte(EE_VOLUME,   stored_volume); // Backup Last Volume Position
                 vol_move_cnt = 0;
                  }
+                
+         if (MUTEn_GetValue()==0)   // When Header Shorted or Volume==OFF
+                    {
+                    i2c_writeNBytes(ADR_PCM9211,&PWDOWN, 2 );
+                    puts_led("   .");
+                    }
+                  else
+                    {
+                    i2c_writeNBytes(ADR_PCM9211,&PWUP, 2 );
+                    set_gainstr(current_volume);
+                    }
+         if (current_volume < 9) // When Volume==OFF
+                MUTEn_SetLow();     //  Standby TAS6422
+         else
+                 MUTEn_SetHigh();   // Run TAS6422
+ \
          }
  // Disable the Global Interrupts
  //INTERRUPT_GlobalInterruptDisable();
