@@ -4,7 +4,8 @@ This project had started as a CyberPit personal Interested porject in 2020.
 
 - Main project web page located at https://cyberpithilo.web.fc2.com/audio/tas6422amp/index.html
 - The top page of CyberPit https://cyberpithilo.web.fc2.com/
-- Machine translation link https://translate.google.com/translate?hl=ja&sl=ja&tl=en&u=https%3A%2F%2Fcyberpithilo.web.fc2.com%2Faudio%2Ftas6422amp%2Findex.html&sandbox=1
+- Yandex Machine translation link https://translate.yandex.com/translate?url=https%3A%2F%2Fcyberpithilo.web.fc2.com%2Faudio%2Ftas6422amp%2Findex.html&lang=ja-en
+- Google Machine translation link https://translate.google.com/translate?hl=ja&sl=ja&tl=en&u=https%3A%2F%2Fcyberpithilo.web.fc2.com%2Faudio%2Ftas6422amp%2Findex.html&sandbox=1
 
 # Hardware Key-parts Information
 
