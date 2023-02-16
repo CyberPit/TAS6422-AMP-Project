@@ -18,5 +18,9 @@ This project had started as a CyberPit personal Interested porject in 2020.
 - Schematic & Board Design Tool: Ki-CAD
 - MCU Software Development Tool: MPLAB X
 
+# Wanted
+IR Remote recuever had embedded in this design. But I don't have a enough time to develop. I hope someone will fork this project and give me a pull reqest.
+Nice to have a support Apple Remote MM4T2AM/A, etc...
+
 # License
 This work and all other materials are licensed under a Creative Commons Attribution Share-Alike 4.0 license. This allows for both personal and commercial derivative works, as long as they credit "Designd by CyberPit HILO" and release their designs under the same license.
