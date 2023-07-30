@@ -1,3 +1,4 @@
+[TAS6422 AMPLIFIER](https://cyberpithilo.web.fc2.com/audio/tas6422amp/FrontSideView.jpg)  
 # TAS6422-AMP-Project
 2.1MHz switching Class-D Audio Amplifire Project
 This project had started as a CyberPit personal Interested porject in 2020.
