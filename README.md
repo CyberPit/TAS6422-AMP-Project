@@ -15,7 +15,7 @@ This project started as a CyberPit personal Interest project in 2020.
 - GUSTARD U12 and WADIA Compatible LVDS(HDMI Connector Used)I2S Input
 - Optical S/PDIF Input and Output
 - Coaxial S/PDIF Input
-- 24bit Analog RCA-pin signal Input
+- RCA-pin 24bit Analog Stereo Signal Input
 - Rotally Encorder for 0.5dB step Volume and paramenter control.
 - 3 digits LED Display
 - Last volume setting memory
